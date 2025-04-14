@@ -48,27 +48,43 @@ class Retangulo(FiguraGeometrica):
 
     def setArea(self):
         return self.largura * self.altura
-    
+
     def setPerimetro(self):
         return 2 * (self.largura + self.altura)
-    
+
 class Triangulo(FiguraGeometrica):
     def __init__(self):
         super().__init__()
         self.ladoUm = None 
         self.ladoDois = None 
         self.ladoTres = None 
+        self.perimetro = None
+        self.semiPerimetro = None
+        self.area = None
 
     def setLadosTriangulo(self, lado1, lado2, lado3):
         self.ladoUm = lado1
         self.ladoDois = lado2
         self.ladoTres = lado3
-
-    def setArea(self):
-        pass 
+        self.setPerimetro()
+        self.setSemiPerimetro()
+        self.setArea()
 
     def setPerimetro(self):
-        
+        self.perimetro = self.ladoUm + self.ladoDois + self.ladoTres
+        return self.perimetro
+
+    def setSemiPerimetro(self):
+        self.semiPerimetro = self.perimetro / 2
+        return self.semiPerimetro
+
+    def setArea(self):
+        s = self.semiPerimetro
+        a = self.ladoUm
+        b = self.ladoDois
+        c = self.ladoTres
+        self.area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+        return self.area
 
 circulo = Circulo()
 circulo.setNome("Circulo")
